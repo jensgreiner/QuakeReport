@@ -12,10 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * Helper methods related to requesting and receiving earthquake data from USGS.
@@ -81,11 +78,12 @@ public final class QueryUtils {
                 double mag = properties.getDouble("mag");
                 String place = properties.getString("place");
                 long time = properties.getLong("time");
-                Date dateObject = new Date(time);
-                SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy", Locale.getDefault());
-                String dateToDisplay = dateFormatter.format(dateObject);
+                // Extract the value for the key called "url"
+                String url = properties.getString("url");
 
-                earthquakes.add(new Earthquake(mag, place, time));
+                // Create a new {@link Earthquake} object with the magnitude, location, time,
+                // and url from the JSON response.
+                earthquakes.add(new Earthquake(mag, place, time, url));
             }
 
         } catch (JSONException e) {
