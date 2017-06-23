@@ -62,11 +62,11 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
             // Using ViewHolder pattern
             holder = new ViewHolder();
-            holder.magnitudeText = (TextView) convertView.findViewById(R.id.magnitude_text_view);
-            holder.locationOffsetText = (TextView) convertView.findViewById(R.id.location_offset_text_view);
-            holder.primaryLocationText = (TextView) convertView.findViewById(R.id.primary_location_text_view);
-            holder.dateText = (TextView) convertView.findViewById(R.id.date_text_view);
-            holder.timeText = (TextView) convertView.findViewById(R.id.time_text_view);
+            holder.magnitudeText = (TextView) convertView.findViewById(R.id.magnitude);
+            holder.locationOffsetText = (TextView) convertView.findViewById(R.id.location_offset);
+            holder.primaryLocationText = (TextView) convertView.findViewById(R.id.primary_location);
+            holder.dateText = (TextView) convertView.findViewById(R.id.date);
+            holder.timeText = (TextView) convertView.findViewById(R.id.time);
 
             // store the holder with the view
             convertView.setTag(holder);
