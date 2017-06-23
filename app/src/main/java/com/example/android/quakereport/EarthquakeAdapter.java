@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -143,7 +144,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
      * from a decimal magnitude value.
      */
     private String formatMagnitude(double magnitude) {
-        DecimalFormat magFormatter = new DecimalFormat("#.0");
+        DecimalFormat magFormatter = new DecimalFormat("#.0", DecimalFormatSymbols.getInstance(Locale.getDefault()));
         return magFormatter.format(magnitude);
     }
 
