@@ -8,16 +8,23 @@
 
     <TextView
         android:id="@+id/magnitude_text_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/magnitude_circle"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        tools:targetApi="jelly_bean"
         tools:text="8.9" />
 
     <TextView
         android:id="@+id/location_offset_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/list_view_item_padding"
+        android:layout_marginStart="@dimen/list_view_item_padding"
         android:layout_weight="1"
         android:gravity="center_vertical"
         tools:text="94km SSE of " />
