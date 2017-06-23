@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,7 +60,8 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
             // Using ViewHolder pattern
             holder = new ViewHolder();
             holder.magnitudeText = (TextView) convertView.findViewById(R.id.magnitude_text_view);
-            holder.locationText = (TextView) convertView.findViewById(R.id.location_text_view);
+            holder.locationOffsetText = (TextView) convertView.findViewById(R.id.location_offset_text_view);
+            holder.primaryLocationText = (TextView) convertView.findViewById(R.id.primary_location_text_view);
             holder.dateText = (TextView) convertView.findViewById(R.id.date_text_view);
             holder.timeText = (TextView) convertView.findViewById(R.id.time_text_view);
 
@@ -76,8 +78,18 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         Earthquake currentEarthquake = getItem(position);
 
         if (currentEarthquake != null) {
-            holder.magnitudeText.setText(currentEarthquake.getMagnitude());
-            holder.locationText.setText(currentEarthquake.getLocation());
+            // Format the magnitude to show 1 decimal place
+            String formattedMagnitude = formatMagnitude(currentEarthquake.getMagnitude());
+            // Display the magnitude of the current earthquake in that TextView
+            holder.magnitudeText.setText(formattedMagnitude);
+
+            // Create a new String from the location information of the earthquake
+            String location = currentEarthquake.getLocation();
+            // Format the location strings
+            String[] locationParts = formatLocation(location);
+            // Display both location parts in their corresponding TextViews
+            holder.locationOffsetText.setText(locationParts[0]);
+            holder.primaryLocationText.setText(locationParts[1]);
 
             // Create a new Date object from the time in milliseconds of the earthquake
             Date dateObject = new Date(currentEarthquake.getTimeInMilliseconds());
@@ -111,15 +123,41 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
     }
 
     /**
+     * Return a String array with the formatted location parts offset and primary
+     */
+    private String[] formatLocation(final String locationToFormat) {
+        String[] parts = new String[2];
+        if (locationToFormat.contains(" of ")) {
+            // Use of split with regex: @link https://stackoverflow.com/a/3481842/1469260
+            parts = locationToFormat.split("(?<=of) ");
+        } else {
+            parts[0] = mContext.getString(R.string.location_offset_default);
+            parts[1] = locationToFormat;
+        }
+
+        return parts;
+    }
+
+    /**
+     * Return the formatted magnitude string showing 1 decimal place (i.e. "3.2")
+     * from a decimal magnitude value.
+     */
+    private String formatMagnitude(double magnitude) {
+        DecimalFormat magFormatter = new DecimalFormat("#.0");
+        return magFormatter.format(magnitude);
+    }
+
+    /**
      * ViewHolder pattern: findViewById method is expensive to use frequently.
      * Having a static class ViewHolder to store the content and retrieve it in an ArrayAdapter
      * is less expensive. (see also code parts above)
      *
      * @link https://stackoverflow.com/a/3832467
      */
-    static class ViewHolder {
+    private static class ViewHolder {
         TextView magnitudeText;
-        TextView locationText;
+        TextView locationOffsetText;
+        TextView primaryLocationText;
         TextView dateText;
         TextView timeText;
     }
