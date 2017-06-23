@@ -1,7 +1,8 @@
 package com.example.android.quakereport;
 
 /**
- * Created by jens on 23.06.17.
+ * Helper class the query the GeoJSON data
+ * Created by Jens Greiner on 23.06.17.
  */
 
 
@@ -11,7 +12,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Helper methods related to requesting and receiving earthquake data from USGS.
@@ -54,7 +58,6 @@ public final class QueryUtils {
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
 
-            // TODO: Parse the response given by the SAMPLE_JSON_RESPONSE string and
             // build up a list of Earthquake objects with the corresponding data.
             JSONObject root = new JSONObject(SAMPLE_JSON_RESPONSE);
 
@@ -65,9 +68,12 @@ public final class QueryUtils {
                 JSONObject properties = earthquake.getJSONObject("properties");
                 String mag = String.valueOf(properties.getDouble("mag"));
                 String place = properties.getString("place");
-                String date = String.valueOf(properties.getInt("time"));
+                long time = properties.getLong("time");
+                Date dateObject = new Date(time);
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy", Locale.getDefault());
+                String dateToDisplay = dateFormatter.format(dateObject);
 
-                earthquakes.add(new Earthquake(mag, place, date));
+                earthquakes.add(new Earthquake(mag, place, time));
             }
 
         } catch (JSONException e) {

@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Custom ArrayAdapter to handle earthquake list objects
@@ -46,6 +49,8 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ViewHolder holder;
 
+        // Check if there is an existing list item view (called convertView) that we can reuse,
+        // otherwise, if convertView is null, then inflate a new list item layout.
         if (convertView == null) {
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
 
@@ -56,6 +61,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
             holder.magnitudeText = (TextView) convertView.findViewById(R.id.magnitude_text_view);
             holder.locationText = (TextView) convertView.findViewById(R.id.location_text_view);
             holder.dateText = (TextView) convertView.findViewById(R.id.date_text_view);
+            holder.timeText = (TextView) convertView.findViewById(R.id.time_text_view);
 
             // store the holder with the view
             convertView.setTag(holder);
@@ -66,15 +72,42 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        // Find the earthquake at the given position in the list of earthquakes
         Earthquake currentEarthquake = getItem(position);
 
         if (currentEarthquake != null) {
-            holder.magnitudeText.setText(currentEarthquake.getmMagnitude());
-            holder.locationText.setText(currentEarthquake.getmLocation());
-            holder.dateText.setText(currentEarthquake.getmDate());
+            holder.magnitudeText.setText(currentEarthquake.getMagnitude());
+            holder.locationText.setText(currentEarthquake.getLocation());
+
+            // Create a new Date object from the time in milliseconds of the earthquake
+            Date dateObject = new Date(currentEarthquake.getTimeInMilliseconds());
+            // Format the date string (i.e. "Mar 3, 1984")
+            String formattedDate = formatDate(dateObject);
+            // Display the date of the current earthquake in that TextView
+            holder.dateText.setText(formattedDate);
+            // Format the time string (i.e. "4:30PM")
+            String formattedTime = formatTime(dateObject);
+            // Display the time of the current earthquake in that TextView
+            holder.timeText.setText(formattedTime);
         }
         return convertView;
 
+    }
+
+    /**
+     * Return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
+     */
+    private String formatDate(Date dateObject) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy", Locale.getDefault());
+        return dateFormat.format(dateObject);
+    }
+
+    /**
+     * Return the formatted date string (i.e. "4:30 PM") from a Date object.
+     */
+    private String formatTime(Date dateObject) {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.getDefault());
+        return timeFormat.format(dateObject);
     }
 
     /**
@@ -88,5 +121,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         TextView magnitudeText;
         TextView locationText;
         TextView dateText;
+        TextView timeText;
     }
 }
