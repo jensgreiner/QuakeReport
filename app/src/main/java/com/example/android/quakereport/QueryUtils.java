@@ -149,6 +149,20 @@ public final class QueryUtils {
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
+            // Handle redirect (response code 301)
+            // @link https://discussions.udacity.com/t/earthquake-app-error-response-code-301/226098/8
+            // See also @link http://www.mkyong.com/java/java-httpurlconnection-follow-redirect-example/
+            int httpResponse = urlConnection.getResponseCode();
+            if (httpResponse == 301) {
+                // Get redirect url from "location" header field
+                String newUrl = urlConnection.getHeaderField("Location");
+
+                // Open the new connection again
+                urlConnection = (HttpURLConnection) new URL(newUrl).openConnection();
+
+                Log.d(LOG_TAG, "Redirect to URL : " + newUrl);
+            }
+
             // If the request was successful (response code 200),
             // then read the input stream and parse the response.
             if (urlConnection.getResponseCode() == 200) {
