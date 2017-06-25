@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -50,6 +51,8 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
     private EarthquakeAdapter mAdapter;
 
     private TextView mEmptyListTextView;
+
+    private ProgressBar mProgressSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +133,10 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
     public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> earthquakes) {
 
         Log.d(LOG_TAG, "onLoadFinished is called ...");
+
+        // Hide the progressBar spinner after loading
+        mProgressSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+        mProgressSpinner.setVisibility(View.GONE);
 
         // Set empty state text to display
         mEmptyListTextView.setText(R.string.empty_list_text);
