@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="earthquake_list_item_height">88dp</dimen>
-    <dimen name="list_view_item_padding">16dp</dimen>
+    <dimen name="list_item_padding">16dp</dimen>
+    <dimen name="mag_circle_view_width">36dp</dimen>
+    <dimen name="mag_circle_view_text_size">16sp</dimen>
+    <dimen name="location_text_view_left_margin">16dp</dimen>
+    <dimen name="location_offset_text_size">12sp</dimen>
+    <dimen name="primary_location_text_size">16sp</dimen>
+    <dimen name="date_text_size">12sp</dimen>
 </resources>

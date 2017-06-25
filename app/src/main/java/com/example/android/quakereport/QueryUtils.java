@@ -1,8 +1,8 @@
 package com.example.android.quakereport;
 
-/**
- * Helper class the query the GeoJSON data
- * Created by Jens Greiner on 23.06.17.
+/*
+  Helper class the query the GeoJSON data
+  Created by Jens Greiner on 23.06.17.
  */
 
 
@@ -29,6 +29,7 @@ import java.util.List;
 /**
  * Helper methods related to requesting and receiving earthquake data from USGS.
  */
+@SuppressWarnings("WeakerAccess")
 public final class QueryUtils {
 
     /**
@@ -63,6 +64,7 @@ public final class QueryUtils {
         }
 
         // Extract relevant fields from the JSON response and create an {@link Event} object
+        //noinspection UnnecessaryLocalVariable
         List<Earthquake> earthquakes = extractEarthquakes(jsonResponse);
 
         // Return the list of {@link Earthquake}s

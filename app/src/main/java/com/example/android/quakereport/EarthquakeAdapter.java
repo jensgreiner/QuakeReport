@@ -24,6 +24,7 @@ import java.util.Locale;
  * Created by Jens Greiner on 18.06.17.
  */
 
+@SuppressWarnings("WeakerAccess")
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
     private final Context mContext;

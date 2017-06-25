@@ -5,11 +5,12 @@ package com.example.android.quakereport;
  * Created by Jens Greiner on 18.06.17.
  */
 
+@SuppressWarnings("WeakerAccess")
 public class Earthquake {
-    private double mMagnitude;
-    private String mLocation;
-    private long mTimeInMilliseconds;
-    private String mUrl;
+    private final double mMagnitude;
+    private final String mLocation;
+    private final long mTimeInMilliseconds;
+    private final String mUrl;
 
     /**
      * Constructs a new {@link Earthquake} object.

@@ -14,6 +14,7 @@ import java.util.List;
  * Created by Jens Greiner on 25.06.17.
  */
 
+@SuppressWarnings("WeakerAccess")
 public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
 
     /**
@@ -21,7 +22,7 @@ public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
      */
     private static final String LOG_TAG = EarthquakeLoader.class.getName();
 
-    private String mUrl;
+    private final String mUrl;
 
     /**
      Constructs a new {@link EarthquakeLoader}.
@@ -29,7 +30,7 @@ public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
      * @param context of the activity
      * @param url to load data from
      */
-    public EarthquakeLoader(Context context, String url) {
+    public EarthquakeLoader(Context context, @SuppressWarnings("SameParameterValue") String url) {
         super(context);
         mUrl = url;
     }
@@ -81,6 +82,7 @@ public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
             return null;
         }
         // Perform the HTTP request for earthquake data and process the response.
+        //noinspection UnnecessaryLocalVariable
         List<Earthquake> earthquakes = QueryUtils.fetchEarthquakeData(mUrl);
         return earthquakes;
     }
