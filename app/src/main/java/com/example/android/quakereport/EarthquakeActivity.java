@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -65,7 +66,12 @@ public class EarthquakeActivity extends AppCompatActivity {
                 Earthquake currentEarthquake = mAdapter.getItem(position);
 
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri earthquakeUri = Uri.parse(currentEarthquake.getUrl());
+                Uri earthquakeUri = null;
+                if (currentEarthquake != null) {
+                    earthquakeUri = Uri.parse(currentEarthquake.getUrl());
+                } else {
+                    Log.d(LOG_TAG, "Object currentEarthquake is null.");
+                }
 
                 // Create a new intent to view the earthquake URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
