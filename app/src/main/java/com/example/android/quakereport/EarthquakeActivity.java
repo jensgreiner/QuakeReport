@@ -178,7 +178,10 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
     }
 
     private boolean internetIsConnected() {
-        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        // Get a reference to the ConnectivityManager to check state of network connectivity
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        // Get details on the currently active default data network
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
