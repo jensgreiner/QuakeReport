@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Loader;
 import android.os.OperationCanceledException;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.List;
 
@@ -40,6 +41,9 @@ public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
      */
     @Override
     protected void onStartLoading() {
+
+        Log.d(LOG_TAG, "onStartLoading is called ...");
+
         forceLoad();
     }
 
@@ -70,6 +74,9 @@ public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
      */
     @Override
     public List<Earthquake> loadInBackground() {
+
+        Log.d(LOG_TAG, "loadInBackground is called ...");
+
         if (TextUtils.isEmpty(mUrl)) {
             return null;
         }

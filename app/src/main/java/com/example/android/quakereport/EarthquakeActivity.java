@@ -93,6 +93,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
         // Initialize the loader. Pass in the int ID constant defined above and pass in null for
         // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
         // because this activity implements the LoaderCallbacks interface).
+        Log.d(LOG_TAG, "initLoader is called ...");
         loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
     }
 
@@ -105,6 +106,9 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
      */
     @Override
     public Loader<List<Earthquake>> onCreateLoader(int id, Bundle args) {
+
+        Log.d(LOG_TAG, "onCreateLoader is called ...");
+
         // Create a new loader for the given URL
         return new EarthquakeLoader(EarthquakeActivity.this, USGS_REQUEST_URL);
     }
@@ -117,6 +121,9 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
      */
     @Override
     public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> earthquakes) {
+
+        Log.d(LOG_TAG, "onLoadFinished is called ...");
+
         // Clear the adapter of previous earthquake data
         mAdapter.clear();
 
@@ -136,6 +143,9 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
      */
     @Override
     public void onLoaderReset(Loader<List<Earthquake>> loader) {
+
+        Log.d(LOG_TAG, "onLoaderReset is called ...");
+
         mAdapter.clear();
     }
 }
