@@ -9,6 +9,16 @@ Used in a Udacity course in the Beginning Android Nanodegree.
 More info on the USGS Earthquake API available at:
 http://earthquake.usgs.gov/fdsnws/event/1/
 
+The app uses a network connection in an AsyncTaskLoader to download its data in an background task.
+It also uses an "empty list view" to show an alternative view when the result list is empty for any reason.
+It uses a ProgressBar spinner view to show the network activity is ongoing if it takes longer to download the data.
+It detects whether an internet connection is available or not. If not, an alternative TextView is shown which tells the state.
+
+Screenshots
+-----------
+
+<img src="https://dl.dropboxusercontent.com/s/5e1wnjvc13m4xly/Screenshot_1498413373.png" alt="" width=200/> <img src="https://dl.dropboxusercontent.com/s/0kvm85wkmd7bcpu/Screenshot_1498413551.png" alt="" width=200/> <img src="https://dl.dropboxusercontent.com/s/3lxu8sduo690ubu/Screenshot_1498413616.png" alt="" width=200/> <img src="https://dl.dropboxusercontent.com/s/o8wc0a9r26lzr4v/Screenshot_1498413689.png" alt="" width=200/>
+
 Pre-requisites
 --------------
 
