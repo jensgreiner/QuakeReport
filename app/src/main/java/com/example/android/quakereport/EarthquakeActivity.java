@@ -80,44 +80,6 @@ public class EarthquakeActivity extends AppCompatActivity {
         task.execute(USGS_REQUEST_URL);
     }
 
-    private void updateUi(List<Earthquake> earthquakesList) {
-        ArrayList<Earthquake> earthquakes = (ArrayList<Earthquake>) earthquakesList;
-        if (earthquakes.isEmpty()) {
-            return;
-        }
-
-        // Find a reference to the {@link ListView} in the layout
-        ListView earthquakeListView = (ListView) findViewById(R.id.list);
-
-        // Create a new {@link ArrayAdapter} of earthquakes
-        final EarthquakeAdapter itemAdapter = new EarthquakeAdapter(this, earthquakes);
-
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
-        earthquakeListView.setAdapter(itemAdapter);
-
-        // Make an onItemClickListener for the ListView
-        earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Find the current earthquake that was clicked on
-                Earthquake currentEarthquake = itemAdapter.getItem(position);
-
-                // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri earthquakeUri = null;
-                if (currentEarthquake != null) {
-                    earthquakeUri = Uri.parse(currentEarthquake.getUrl());
-                }
-
-                // Create a new intent to view the earthquake URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
-
-                // Send the intent to launch a new activity
-                startActivity(websiteIntent);
-            }
-        });
-    }
-
     private class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
 
         /**
