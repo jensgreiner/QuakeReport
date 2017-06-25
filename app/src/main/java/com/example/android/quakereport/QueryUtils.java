@@ -56,13 +56,13 @@ public final class QueryUtils {
         try {
             jsonResponse = makeHttpRequest(url);
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Error closing input stream", e);
+            Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
         // Extract relevant fields from the JSON response and create an {@link Event} object
         List<Earthquake> earthquakes = extractEarthquakes(jsonResponse);
 
-        // Return the {@link Event}
+        // Return the list of {@link Earthquake}s
         return earthquakes;
     }
 
@@ -71,10 +71,10 @@ public final class QueryUtils {
      * parsing a JSON response.
      */
     @Nullable
-    private static ArrayList<Earthquake> extractEarthquakes(String earthquakeJSON) {
+    private static List<Earthquake> extractEarthquakes(String earthquakeJSON) {
 
         // Create an empty ArrayList that we can start adding earthquakes to
-        ArrayList<Earthquake> earthquakes = new ArrayList<>();
+        List<Earthquake> earthquakes = new ArrayList<>();
 
         // If the string earthquakeJSON is empty or null return early
         if (TextUtils.isEmpty(earthquakeJSON)) {
@@ -86,22 +86,38 @@ public final class QueryUtils {
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
 
-            // build up a list of Earthquake objects with the corresponding data.
+            // Create a JSONObject from the JSON response string
             JSONObject root = new JSONObject(earthquakeJSON);
 
+            // Extract the JSONArray associated with the key called "features",
+            // which represents a list of features (or earthquakes).
             JSONArray features = root.getJSONArray("features");
 
+            // For each earthquake in the earthquakeArray, create an {@link Earthquake} object
             for (int i = 0; i < features.length(); i++) {
+
+                // Get a single earthquake at position i within the list of earthquakes
                 JSONObject earthquake = features.getJSONObject(i);
+
+                // For a given earthquake, extract the JSONObject associated with the
+                // key called "properties", which represents a list of all properties
+                // for that earthquake.
                 JSONObject properties = earthquake.getJSONObject("properties");
+
+                // Extract the value for the key called "mag"
                 double mag = properties.getDouble("mag");
+
+                // Extract the value for the key called "place"
                 String place = properties.getString("place");
+
+                // Extract the value for the key called "time"
                 long time = properties.getLong("time");
+
                 // Extract the value for the key called "url"
                 String url = properties.getString("url");
 
                 // Create a new {@link Earthquake} object with the magnitude, location, time,
-                // and url from the JSON response.
+                // and url from the JSON response and add it to the list of earthquakes
                 earthquakes.add(new Earthquake(mag, place, time, url));
             }
 
