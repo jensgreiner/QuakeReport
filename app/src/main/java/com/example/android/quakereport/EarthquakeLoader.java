@@ -15,8 +15,19 @@ import java.util.List;
 
 public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
 
+    /**
+     * Tag for log messages
+     */
+    private static final String LOG_TAG = EarthquakeLoader.class.getName();
+
     private String mUrl;
 
+    /**
+     Constructs a new {@link EarthquakeLoader}.
+     *
+     * @param context of the activity
+     * @param url to load data from
+     */
     public EarthquakeLoader(Context context, String url) {
         super(context);
         mUrl = url;
