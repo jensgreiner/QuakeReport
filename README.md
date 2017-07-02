@@ -19,6 +19,10 @@ Screenshots
 
 <img src="https://dl.dropboxusercontent.com/s/5e1wnjvc13m4xly/Screenshot_1498413373.png" alt="" width=200/> <img src="https://dl.dropboxusercontent.com/s/0kvm85wkmd7bcpu/Screenshot_1498413551.png" alt="" width=200/> <img src="https://dl.dropboxusercontent.com/s/3lxu8sduo690ubu/Screenshot_1498413616.png" alt="" width=200/> <img src="https://dl.dropboxusercontent.com/s/o8wc0a9r26lzr4v/Screenshot_1498413689.png" alt="" width=200/>
 
+After adding preferences menu:
+
+<img src="https://dl.dropboxusercontent.com/s/ut7dqqvhqk6jhw5/Screenshot_1498990410.png" alt="" width=200/> <img src="https://dl.dropboxusercontent.com/s/pgt1wxqtabsz1uq/Screenshot_1498990414.png" alt="" width=200/> <img src="https://dl.dropboxusercontent.com/s/mrz6zxkwo4ptwci/Screenshot_1498990419.png" alt="" width=200/> <img src="https://dl.dropboxusercontent.com/s/nzgynlo5v1xg1v7/Screenshot_1498990423.png" alt="" width=200/>
+
 Pre-requisites
 --------------
 
